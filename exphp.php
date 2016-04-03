@@ -95,5 +95,13 @@ class ex{
         }
         return $ret;
     }
+    static function rename ( string $oldname, string $newname, /*resource*/ $context = null):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('rename',$args);
+        if(false===$ret){
+            throw new RuntimeException('rename() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
