@@ -111,5 +111,11 @@ class ex{
         }
         return $ret;
     }
-
+    static function realpath_cache_size ( /*void*/ ):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('realpath_cache_size',$args);
+		//
+        return $ret;
+    }
+    
 }
