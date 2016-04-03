@@ -195,6 +195,16 @@ class ex{
         }
         return $ret;
     }
+    static function lstat ( string $filename):array {
+        $args=func_get_args();
+        $ret=call_user_func_array('lstat',$args);
+		//As of writing, its actually undocumented that this function can return false, but
+		//according to comments, it returns false on failure. ill believe the comments.
+        if(false===$ret){
+            throw new RuntimeException('lstat() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
