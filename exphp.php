@@ -179,6 +179,14 @@ class ex{
         }
         return $ret;
     }
+    static function move_uploaded_file ( string $filename, string $destination):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('move_uploaded_file',$args);
+        if(false===$ret){
+            throw new RuntimeException('move_uploaded_file() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
