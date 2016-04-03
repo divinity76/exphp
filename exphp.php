@@ -155,6 +155,13 @@ class ex{
         }
         return $ret;
     }
-
+    static function pathinfo ( string $path, int $options = PATHINFO_DIRNAME | PATHINFO_BASENAME | PATHINFO_EXTENSION | PATHINFO_FILENAME)/*:mixed*/ {
+        $args=func_get_args();
+        $ret=call_user_func_array('pathinfo',$args);
+        if(false===$ret){
+            throw new RuntimeException('pathinfo() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
