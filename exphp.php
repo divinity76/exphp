@@ -87,5 +87,13 @@ class ex{
         }
         return $ret;
     }
+    static function rewind ( /*resource*/ $handle):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('rewind',$args);
+        if(false===$ret){
+            throw new RuntimeException('rewind() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
