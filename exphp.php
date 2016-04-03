@@ -171,5 +171,14 @@ class ex{
         }
         return $ret;
     }
+    static function parse_ini_file ( string $filename, bool $process_sections = false, int $scanner_mode = INI_SCANNER_NORMAL):array {
+        $args=func_get_args();
+        $ret=call_user_func_array('parse_ini_file',$args);
+        if(false===$ret){
+            throw new RuntimeException('parse_ini_file() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+
 
 }
