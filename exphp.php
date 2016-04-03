@@ -205,6 +205,15 @@ class ex{
         }
         return $ret;
     }
+    static function linkinfo ( string $path):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('linkinfo',$args);
+        if(false===$ret || 0===$ret){
+			//according to docs, can also return int(0) for fails.. and according to comments, can return -1 if the link dont exist..
+            throw new RuntimeException('linkinfo() failed. returned '.self::_return_var_dump($ret).'. last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
