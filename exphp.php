@@ -64,6 +64,14 @@ class ex{
         return $ret;
     }
 	//add set_file_buffer?
+    static function stream_set_write_buffer ( /*resource*/ $stream, int $buffer):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('stream_set_write_buffer',$args);
+        if(0!==$ret){
+            throw new RuntimeException('stream_set_write_buffer() failed. return int(0) means success, but it returned'.self::_return_var_dump($ret).'. last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
