@@ -31,5 +31,14 @@ class ex{
         }
         return $ret;
     }
+    static function tmpfile ( /*void*/ )/*:resource*/ {
+    
+        $args=func_get_args();
+        $ret=call_user_func_array('tmpfile',$args);
+        if(false===$ret){
+            throw new RuntimeException('tmpfile() failed. last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
