@@ -139,6 +139,12 @@ class ex{
         }
         return $ret;
     }
-
-
+    static function popen ( string $command, string $mode)/*:resource*/ {
+        $args=func_get_args();
+        $ret=call_user_func_array('popen',$args);
+        if(false===$ret){
+            throw new RuntimeException('popen() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 }
