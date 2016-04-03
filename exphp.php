@@ -55,7 +55,15 @@ class ex{
         }
         return $ret;
     }
+	static function stat ( string $filename):array {
+        $args=func_get_args();
+        $ret=call_user_func_array('stat',$args);
+        if(false===$ret){
+            throw new RuntimeException('stat() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 	//add set_file_buffer?
-	
+
 
 }
