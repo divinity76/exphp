@@ -16,6 +16,13 @@ class ex{
         }
         return $ret;
     }
+    static function umask ( int $mask = null):int {
     
-
+        $ret=call_user_func_array('umask',func_get_args());
+        if($mask!==null && $ret!==$mask){
+            throw new RuntimeException('umask() failed. tried to set umask to '.self::_return_var_dump(error_get_last($mask)).', but just managed to set it to '.self::_return_var_dump(error_get_last($ret)).'.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+	
 }
