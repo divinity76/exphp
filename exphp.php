@@ -249,9 +249,13 @@ class ex{
     static function fwrite ( /*resource*/ $handle, string $string, int $length = null):int {
         $args=func_get_args();
         $ret=call_user_func_array('fwrite',$args);
+		$min=min(strlen($string),$length);
         if(false===$ret){
-            throw new RuntimeException('fwrite() failed.   last error: '.self::_return_var_dump(error_get_last()));
+            throw new RuntimeException('fwrite() failed. returned false.   last error: '.self::_return_var_dump(error_get_last()));
         }
+		if($min!==$ret){
+            throw new RuntimeException('fwrite() failed. tried to write '.self::_return_var_dump($min).' bytes, but could only write '.self::_return_var_dump($ret).' bytes. full harddisk maybe?  last error: '.self::_return_var_dump(error_get_last()));			
+		}
         return $ret;
     }
 
