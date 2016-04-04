@@ -582,6 +582,15 @@ class ex{
         }
         return $ret;
     }
+	//clearstatcache?
+    static function chown ( string $filename, /*mixed*/ $user):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('chown',$args);
+        if(false===$ret){
+            throw new RuntimeException('chown() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
