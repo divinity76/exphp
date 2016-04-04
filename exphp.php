@@ -274,6 +274,12 @@ class ex{
         }
         return $ret;
     }
-
+    static function fstat ( /*resource*/ $handle):array {
+        $args=func_get_args();
+        $ret=call_user_func_array('fstat',$args);
+		//
+        return $ret;
+    }
+    
 
 }
