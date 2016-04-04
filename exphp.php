@@ -336,5 +336,13 @@ class ex{
         }
         return $ret;
     }
+    static function fpassthru ( /*resource*/ $handle):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('fpassthru',$args);
+        if(false===$ret){
+            throw new RuntimeException('fpassthru() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
