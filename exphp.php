@@ -389,5 +389,13 @@ class ex{
         }
         return $ret;
     }
-
+    static function fileowner ( string $filename):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('fileowner',$args);
+        if(false===$ret){
+            throw new RuntimeException('fileowner() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+ 
 }
