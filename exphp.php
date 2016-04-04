@@ -266,6 +266,14 @@ class ex{
         }
         return $ret;
     }
+    static function ftell ( /*resource*/ $handle):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('ftell',$args);
+        if(false===$ret){
+            throw new RuntimeException('ftell() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
