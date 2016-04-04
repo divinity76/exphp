@@ -352,5 +352,10 @@ class ex{
         }
         return $ret;
     }
+    static function fnmatch ( string $pattern, string $string, int $flags = 0):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('fnmatch',$args);
+        return $ret;
+    }
 
 }
