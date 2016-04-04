@@ -288,14 +288,14 @@ class ex{
         }
         return $ret;
     }
-    static function fscanf ( /*resource*/ $handle, string $format,... /*mixed &$... = null)/*:mixed*/ {
-        $args=func_get_args();
-        $ret=call_user_func_array('fscanf',$args);
-        if(false===$ret){
-            throw new RuntimeException('fscanf() failed.   last error: '.self::_return_var_dump(error_get_last()));
-        }
-        return $ret;
-    }
+    // static function fscanf ( /*resource*/ $handle, string $format,&.../*mixed &$... = null)/*:mixed*/ {
+        // $args=func_get_args();
+        // $ret=call_user_func_array('fscanf',$args);
+        // if(false===$ret){
+            // throw new RuntimeException('fscanf() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        // }
+        // return $ret;
+    // }
     static function fread ( /*resource*/ $handle, int $length):string {
         $args=func_get_args();
         $ret=call_user_func_array('fread',$args);
