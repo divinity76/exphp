@@ -566,6 +566,14 @@ class ex{
 		//not really documented to return anything special for errors...
         return $ret;
     }
-
+    static function unlink ( string $filename, /*resource*/ $context = null):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('unlink',$args);
+        if(false===$ret){
+            throw new RuntimeException('unlink() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+    
 
 }
