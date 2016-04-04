@@ -296,6 +296,13 @@ class ex{
         }
         return $ret;
     }
-
+    static function fread ( /*resource*/ $handle, int $length):string {
+        $args=func_get_args();
+        $ret=call_user_func_array('fread',$args);
+        if(false===$ret){
+            throw new RuntimeException('fread() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
