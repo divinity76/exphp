@@ -527,6 +527,15 @@ class ex{
         $ret=call_user_func_array('feof',$args);
 		//can't think of a way to differenciate between an actual error and EOF...
         return $ret;
-    } 
+    }
+    static function fclose ( /*resource*/ $handle):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('fclose',$args);
+        if(false===$ret){
+            throw new RuntimeException('fclose() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+
 
 }
