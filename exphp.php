@@ -447,9 +447,22 @@ class ex{
     }
     static function file_put_contents ( string $filename, /*mixed*/ $data, int $flags = 0, /*resource*/ $context = null):int {
         $args=func_get_args();
+		$min=false;
+		if(is_array($data)){
+			$min=strlen(implode('',$data));
+		} elseif(is_string($data)){
+			$min=strlen($data);
+		} else {
+			//probably a resource, given that stream_get_meta_data often can't be trusted
+			//im not even going to try...
+			$min=false;
+		}
         $ret=call_user_func_array('file_put_contents',$args);
-        if(false===$ret){
-            throw new RuntimeException('file_put_contents() failed.   last error: '.self::_return_var_dump(error_get_last()));
+		if($min===false){
+			return $ret;
+		}
+        if($min!==$ret){
+            throw new RuntimeException('file_put_contents() failed. tried to write '.self::_return_var_dump($min).' bytes, but could only write '.self::_return_var_dump($ret).' bytes. full disk?  last error: '.self::_return_var_dump(error_get_last()));
         }
         return $ret;
     }
