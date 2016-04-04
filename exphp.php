@@ -365,5 +365,13 @@ class ex{
         }
         return $ret;
     }
+    static function filetype ( string $filename):string {
+        $args=func_get_args();
+        $ret=call_user_func_array('filetype',$args);
+        if(false===$ret){
+            throw new RuntimeException('filetype() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
