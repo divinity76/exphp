@@ -495,5 +495,16 @@ class ex{
         }
         return $ret;
     }
+    static function fgetcsv ( /*resource*/ $handle, int $length = 0, string $delimiter = ",", string $enclosure = '"', string $escape = "\\"):array {
+        $args=func_get_args();
+        $ret=call_user_func_array('fgetcsv',$args);
+        if(null===$ret){
+            throw new RuntimeException('fgetcsv() failed. returned null. means invalid handle.  last error: '.self::_return_var_dump(error_get_last()));
+        }
+        if(false===$ret){
+            throw new RuntimeException('fgetcsv() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
