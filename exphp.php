@@ -445,5 +445,13 @@ class ex{
         }
         return $ret;
     }
+    static function file_put_contents ( string $filename, /*mixed*/ $data, int $flags = 0, /*resource*/ $context = null):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('file_put_contents',$args);
+        if(false===$ret){
+            throw new RuntimeException('file_put_contents() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
