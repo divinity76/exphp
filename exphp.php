@@ -466,5 +466,13 @@ class ex{
         }
         return $ret;
     }
+    static function file_get_contents ( string $filename, bool $use_include_path = false, /*resource*/ $context = null, int $offset = 0, int $maxlen = null):string {
+        $args=func_get_args();
+        $ret=call_user_func_array('file_get_contents',$args);
+        if(false===$ret){
+            throw new RuntimeException('file_get_contents() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
