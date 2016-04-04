@@ -230,6 +230,14 @@ class ex{
         }
         return $ret;
     }
+    static function lchgrp ( string $filename, /*mixed*/ $group):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('lchgrp',$args);
+        if(false===$ret){
+            throw new RuntimeException('lchgrp() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
