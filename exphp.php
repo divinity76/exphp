@@ -280,6 +280,14 @@ class ex{
 		//
         return $ret;
     }
-    
+    static function fseek ( /*resource*/ $handle, int $offset, int $whence = SEEK_SET):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('fseek',$args);
+        if(-1===$ret){
+            throw new RuntimeException('fseek() failed. returned -1. last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+
 
 }
