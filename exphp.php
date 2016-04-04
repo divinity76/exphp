@@ -316,5 +316,17 @@ class ex{
 		}
         return $ret;
     }
+    static function fputs ( /*resource*/ $handle, string $string, int $length = null):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('fputs',$args);
+		$min=min(strlen($string),$length);
+        if(false===$ret){
+            throw new RuntimeException('fputs() failed. returned false. last error: '.self::_return_var_dump(error_get_last()));
+        }
+		if($min!==$ret){
+			throw new RuntimeException('fputs() failed. tried to write '.self::_return_var_dump($min).' bytes, but could only write '.self::_return_var_dump($ret).' bytes!');
+		}
+        return $ret;
+    }
 
 }
