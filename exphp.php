@@ -246,6 +246,14 @@ class ex{
         }
         return $ret;
     }
+    static function fwrite ( /*resource*/ $handle, string $string, int $length = null):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('fwrite',$args);
+        if(false===$ret){
+            throw new RuntimeException('fwrite() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
