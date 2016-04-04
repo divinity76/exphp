@@ -238,6 +238,14 @@ class ex{
         }
         return $ret;
     }
+    static function glob ( string $pattern, int $flags = 0):array {
+        $args=func_get_args();
+        $ret=call_user_func_array('glob',$args);
+        if(false===$ret){
+            throw new RuntimeException('glob() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
