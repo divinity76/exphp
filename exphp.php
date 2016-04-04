@@ -487,5 +487,13 @@ class ex{
         }
         return $ret;
     }
+    static function fgets ( /*resource*/ $handle, int $length = null):string {
+        $args=func_get_args();
+        $ret=call_user_func_array('fgets',$args);
+        if(false===$ret){
+            throw new RuntimeException('fgets() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
