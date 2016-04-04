@@ -536,6 +536,14 @@ class ex{
         }
         return $ret;
     }
+    static function disk_free_space ( string $directory):float {
+        $args=func_get_args();
+        $ret=call_user_func_array('disk_free_space',$args);
+        if(false===$ret){
+            throw new RuntimeException('disk_free_space() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
