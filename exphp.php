@@ -413,5 +413,13 @@ class ex{
         }
         return $ret;
     }
+    static function filegroup ( string $filename):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('filegroup',$args);
+        if(false===$ret){
+            throw new RuntimeException('filegroup() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
