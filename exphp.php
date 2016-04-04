@@ -574,6 +574,14 @@ class ex{
         }
         return $ret;
     }
-    
+    static function copy ( string $source, string $dest, /*resource*/ $context = null):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('copy',$args);
+        if(false===$ret){
+            throw new RuntimeException('copy() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+
 
 }
