@@ -552,6 +552,14 @@ class ex{
         }
         return $ret;
     }
+    static function disk_total_space ( string $directory):float {
+        $args=func_get_args();
+        $ret=call_user_func_array('disk_total_space',$args);
+        if(false===$ret){
+            throw new RuntimeException('disk_total_space() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
