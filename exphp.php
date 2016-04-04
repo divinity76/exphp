@@ -474,5 +474,10 @@ class ex{
         }
         return $ret;
     }
+    static function file_exists ( string $filename):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('file_exists',$args);
+        return $ret;
+    }
 
 }
