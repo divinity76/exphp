@@ -328,5 +328,13 @@ class ex{
 		}
         return $ret;
     }
+    static function fputcsv ( /*resource*/ $handle, array $fields, string $delimiter = ",", string $enclosure = '"', string $escape_char = "\\"):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('fputcsv',$args);
+        if(false===$ret){
+            throw new RuntimeException('fputcsv() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
