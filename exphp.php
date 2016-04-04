@@ -479,5 +479,13 @@ class ex{
         $ret=call_user_func_array('file_exists',$args);
         return $ret;
     }
+    static function fgetss ( /*resource*/ $handle, int $length = null, string $allowable_tags = null):string {
+        $args=func_get_args();
+        $ret=call_user_func_array('fgetss',$args);
+        if(false===$ret){
+            throw new RuntimeException('fgetss() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
