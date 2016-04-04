@@ -381,5 +381,13 @@ class ex{
         }
         return $ret;
     }
+    static function fileperms ( string $filename):int {
+        $args=func_get_args();
+        $ret=call_user_func_array('fileperms',$args);
+        if(false===$ret){//It is not documented to return false on error, but testing shows it's the case.
+            throw new RuntimeException('fileperms() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
