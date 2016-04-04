@@ -560,6 +560,12 @@ class ex{
         }
         return $ret;
     }
+    static function dirname ( string $path, int $levels = 1):string {
+        $args=func_get_args();
+        $ret=call_user_func_array('dirname',$args);
+		//not really documented to return anything special for errors...
+        return $ret;
+    }
 
 
 }
