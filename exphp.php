@@ -214,6 +214,14 @@ class ex{
         }
         return $ret;
     }
+    static function link ( string $target, string $link):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('link',$args);
+        if(false===$ret){
+            throw new RuntimeException('link() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 
 }
