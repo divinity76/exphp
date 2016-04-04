@@ -522,5 +522,11 @@ class ex{
         }
         return $ret;
     }
+    static function feof ( /*resource*/ $handle):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('feof',$args);
+		//can't think of a way to differenciate between an actual error and EOF...
+        return $ret;
+    } 
 
 }
