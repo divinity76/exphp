@@ -620,5 +620,13 @@ class ex{
         }
         return $ret;
     }
+    static function opendir ( string $path, /*resource*/ $context = null)/*:resource*/ {
+        $args=func_get_args();
+        $ret=call_user_func_array('opendir',$args);
+        if(false===$ret){
+            throw new RuntimeException('opendir() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
