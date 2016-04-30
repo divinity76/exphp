@@ -604,5 +604,13 @@ class ex{
         }
         return $ret;
     }
+    static function dir ( string $directory, /*resource*/ $context = null):Directory {
+        $args=func_get_args();
+        $ret=call_user_func_array('dir',$args);
+        if(false===$ret || NULL===$ret){
+            throw new RuntimeException('dir() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
 
 }
