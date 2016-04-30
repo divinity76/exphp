@@ -596,4 +596,13 @@ class ex{
         return $ret;
     }
 
+    static function chroot ( string $directory):bool {
+        $args=func_get_args();
+        $ret=call_user_func_array('chroot',$args);
+        if(false===$ret){
+            throw new RuntimeException('chroot() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+
 }
