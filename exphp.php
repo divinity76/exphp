@@ -636,5 +636,13 @@ class ex{
         }
         return $ret;
     }
-    
+    static function scandir ( string $directory, int $sorting_order = SCANDIR_SORT_ASCENDING, /*resource*/ $context = null):array {
+        $args=func_get_args();
+        $ret=call_user_func_array('scandir',$args);
+        if(false===$ret){
+            throw new RuntimeException('scandir() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+
 }
