@@ -607,7 +607,7 @@ class ex{
     static function dir ( string $directory, /*resource*/ $context = null):Directory {
         $args=func_get_args();
         $ret=call_user_func_array('dir',$args);
-        if(false===$ret || NULL===$ret){
+        if(false===$ret || null===$ret){
             throw new RuntimeException('dir() failed.   last error: '.self::_return_var_dump(error_get_last()));
         }
         return $ret;
@@ -628,5 +628,13 @@ class ex{
         }
         return $ret;
     }
-
+    static function readdir ( /*resource*/ $dir_handle=null):string {
+        $args=func_get_args();
+        $ret=call_user_func_array('readdir',$args);
+        if(false===$ret){
+            throw new RuntimeException('readdir() failed.   last error: '.self::_return_var_dump(error_get_last()));
+        }
+        return $ret;
+    }
+    
 }
