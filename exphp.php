@@ -642,4 +642,14 @@ class ex {
 		}
 		return $ret;
 	}
+	/* <sockets> */
+	static function socket_accept ( /*resource*/ $socket)/*:resource*/ {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_accept', $args );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_accept() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) );
+		}
+		return $ret;
+	}
+	/* </sockets> */
 }
