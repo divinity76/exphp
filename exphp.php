@@ -683,6 +683,14 @@ class ex {
 		}
 		return $ret;
 	}
+	static function socket_create(int $domain, int $type, int $protocol)/*:resource*/ {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_create', $args );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_create() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error () ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error () ) ) );
+		}
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
