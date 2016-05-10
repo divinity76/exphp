@@ -337,8 +337,8 @@ class ex {
 		return $ret;
 	}
 	static function flock ( /*resource*/ $handle, int $operation, int &$wouldblock = null): bool {
-		$args = func_get_args ();
-		$ret = call_user_func_array ( 'flock', $args );
+		// $args = func_get_args ();
+		$ret = flock ( $handle, $operation, $wouldblock );
 		if (false === $ret) {
 			throw new RuntimeException ( 'flock() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) );
 		}
