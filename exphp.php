@@ -762,6 +762,14 @@ class ex {
 		$ret = call_user_func_array ( 'socket_last_error', $args );
 		return $ret;
 	}
+	static function socket_listen ( /*resource*/ $socket, int $backlog = 0): bool {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_listen', $args );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_listen() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
