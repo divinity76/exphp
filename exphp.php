@@ -889,6 +889,18 @@ class ex {
 		$ret = call_user_func_array ( 'socket_strerror', $args );
 		return $ret;
 	}
+	static function socket_write ( /*resource*/ $socket, string $buffer, int $length = null): int {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_write', $args );
+		$minimum = min ( strlen ( $buffer ), $length );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_write() failed. returned false. last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		if ($ret < $minimum) {
+			throw new RuntimeException ( 'socket_write() failed. tried to send ' . self::_return_var_dump ( $minimum ) . ' bytes, but could only send ' . self::_return_var_dump ( $ret ) . ' bytes. last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
