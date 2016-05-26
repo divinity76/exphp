@@ -884,6 +884,11 @@ class ex {
 		}
 		return $ret;
 	}
+	static function socket_strerror(int $errno): string {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_strerror', $args );
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
