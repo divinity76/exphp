@@ -9,8 +9,13 @@ class ex {
 	}
 	static function umask(int $mask = null): int {
 		$ret = call_user_func_array ( 'umask', func_get_args () );
-		if ($mask !== null && $ret !== ($mask & 0777)) {
-			throw new RuntimeException ( 'umask() failed. tried to set umask to ( ' . self::_return_var_dump ( $mask ) . ' & 0777) , but just managed to set it to ' . self::_return_var_dump ( error_get_last ( $ret ) ) . '.   last error: ' . self::_return_var_dump ( error_get_last () ) );
+		if (is_null ( $mask )) {
+			$mask = 0;
+		}
+		$shouldbe = $mask & 0777;
+		$is = umask ( 0 );
+		if ($shouldbe !== $is) {
+			throw new RuntimeException ( 'umask() failed. tried to set umask to ( ' . self::_return_var_dump ( $mask ) . ' & 0777) , but just managed to set it to ' . self::_return_var_dump ( $is ) . '.   last error: ' . self::_return_var_dump ( error_get_last () ) );
 		}
 		return $ret;
 	}
