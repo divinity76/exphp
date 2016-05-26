@@ -669,6 +669,11 @@ class ex {
 		$ret = call_user_func_array ( 'socket_clear_error', $args );
 		return $ret;
 	}
+	static function socket_close ( /*resource*/ $socket)/*:void*/ {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_close', $args );
+		return $ret;
+	}
 	static function socket_connect ( /*resource*/ $socket, string $address, int $port = 0): bool {
 		$args = func_get_args ();
 		$ret = call_user_func_array ( 'socket_connect', $args );
