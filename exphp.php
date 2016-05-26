@@ -770,6 +770,14 @@ class ex {
 		}
 		return $ret;
 	}
+	static function socket_read ( /*resource*/ $socket, int $length, int $type = PHP_BINARY_READ): string {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_read', $args );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_read() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
