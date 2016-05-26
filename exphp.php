@@ -860,6 +860,14 @@ class ex {
 		}
 		return $ret;
 	}
+	static function socket_set_option ( /*resource*/ $socket, int $level, int $optname, /*mixed*/ $optval): bool {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_set_option', $args );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_set_option() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
