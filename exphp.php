@@ -715,14 +715,15 @@ class ex {
 		}
 		return $ret;
 	}
-	// static function socket_get_option ( /*resource*/ $socket, int $level, int $optname)/*:mixed*/ {
-	// $args = func_get_args ();
-	// $ret = call_user_func_array ( 'socket_get_option', $args );
-	// if (false === $ret) {
-	// throw new RuntimeException ( 'socket_get_option() failed. last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
-	// }
-	// return $ret;
-	// }
+	static function socket_get_option ( /*resource*/ $socket, int $level, int $optname)/*:mixed*/ {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_get_option', $args );
+		// false is always error, everything else is int/array it seems.
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_get_option() failed. last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		return $ret;
+	}
 	
 	// static function socket_getopt ( /*resource*/ $socket, int $level, int $optname)/*:mixed*/ {
 	// $args = func_get_args ();
