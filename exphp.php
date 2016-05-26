@@ -832,6 +832,18 @@ class ex {
 	// }
 	// return $ret;
 	// }
+	static function socket_sendto ( /*resource*/ $socket, string $buf, int $len, int $flags, string $addr, int $port = 0): int {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_sendto', $args );
+		$minimum = min ( strlen ( $buf ), $min );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_sendto() failed. returned false. last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		if ($ret < $minimum) {
+			throw new RuntimeException ( 'socket_sendto() failed. tried to send ' . self::_return_var_dump ( $minimum ) . ' bytes, but could only send ' . self::_return_var_dump ( $ret ) . ' bytes. last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
