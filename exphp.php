@@ -757,6 +757,11 @@ class ex {
 		}
 		return $ret;
 	}
+	static function socket_last_error ( /*resource*/ $socket = null): int {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_last_error', $args );
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
