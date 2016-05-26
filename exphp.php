@@ -803,6 +803,14 @@ class ex {
 	// }
 	// return $ret;
 	// }
+	static function socket_select(array &$read, array &$write, array &$except, int $tv_sec, int $tv_usec = 0): int {
+		$args = func_get_args ();
+		$ret = socket_select ( $read, $write, $except, $tv_sec, $tv_usec );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_select() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
