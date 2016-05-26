@@ -786,6 +786,14 @@ class ex {
 		}
 		return $ret;
 	}
+	static function socket_recvfrom ( /*resource*/ $socket, string &$buf, int $len, int $flags, string &$name, int &$port = null): int {
+		$args = func_get_args ();
+		$ret = socket_recvfrom ( $socket, $buf, $len, $flags, $name, $port );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_recvfrom() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
