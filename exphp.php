@@ -876,6 +876,14 @@ class ex {
 		}
 		return $ret;
 	}
+	static function socket_shutdown ( /*resource*/ $socket, int $how = 2): bool {
+		$args = func_get_args ();
+		$ret = call_user_func_array ( 'socket_shutdown', $args );
+		if (false === $ret) {
+			throw new RuntimeException ( 'socket_shutdown() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) . '. socket_last_error: ' . self::_return_var_dump ( socket_last_error ( $socket ) ) . '. socket_strerror: ' . self::_return_var_dump ( socket_strerror ( socket_last_error ( $socket ) ) ) );
+		}
+		return $ret;
+	}
 	
 	/* </sockets> */
 }
