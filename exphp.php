@@ -273,7 +273,10 @@ class ex {
 	static function fstat ( /*resource*/ $handle): array {
 		$args = func_get_args ();
 		$ret = call_user_func_array ( 'fstat', $args );
-		//
+		// it is undocumented, but testing shows that fstat returns false on failure.
+		if (false === $ret) {
+			throw new RuntimeException ( 'fstat() failed.   last error: ' . self::_return_var_dump ( error_get_last () ) );
+		}
 		return $ret;
 	}
 	static function fseek ( /*resource*/ $handle, int $offset, int $whence = SEEK_SET): int {
